@@ -38,11 +38,18 @@ function getUserInfo() {
 function renderAvatar(user) {
     var name = user.nickname || user.username
     $('#welcome').html('欢迎&nbsp;' + name)
-    if (user.user_pic) {
-        $('.layui-nav-img').attr('src', user.user_pic).show()
+    if (user.user_pic !== null) {
+        // 3.1 渲染图片头像
+        $('.layui-nav-img')
+            .attr('src', user.user_pic)
+            .show()
         $('.text-avatar').hide()
+    } else {
+        // 3.2 渲染文本头像
+        $('.layui-nav-img').hide()
+        var first = name[0].toUpperCase()
+        $('.text-avatar')
+            .html(first)
+            .show()
     }
-    $('.layui-nav-img').hide()
-    var first = name[0].toUpperCase()
-    $('.text-avatar').html(first).show()
 }
